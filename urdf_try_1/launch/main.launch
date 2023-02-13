@@ -1,0 +1,63 @@
+<launch>
+    <!--  Load parameter  -->
+    <rosparam file="$(find urdf_try_1)/para.yaml"/>
+
+    <!--  Open keyboard control  -->
+    <include file="$(find turtlebot_teleop)/launch/keyboard_teleop.launch"/>
+
+    <!--  Open Lidar  -->
+    <!--        <include file="$(find hls_lfcd_lds_driver)/launch/hlds_laser.launch"/>-->
+
+<!--    <include file="$(find realsense2_camera)/launch/rs_camera.launch">-->
+<!--        <arg name="align_depth" value="true"/>-->
+<!--        <arg name="enable_gyro" default="false"/>-->
+<!--        <arg name="enable_accel" default="false"/>-->
+<!--    </include>-->
+
+
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_camera_link"
+          args="0.105 0 0.1 0.0 0.0 0.0 base_link camera_link 100"/>
+
+    <!--  Open robot control  -->
+    <node output="screen"
+          name="RobotControl"
+          pkg="urdf_try_1"
+          type="robot_control.py"/>
+
+    <!--  Publish robot info  -->
+    <node output="screen"
+          name="PublishRobotInfo"
+          pkg="urdf_try_1"
+          type="pub_robot_info.py"/>
+
+    <!-- Joint state publish  -->
+    <node output="screen"
+          name="JointStatePublish"
+          pkg="urdf_try_1"
+          type="joint_state_pub.py"/>
+
+<!--     Robot tf publish  -->
+    <node output="screen"
+          name="RobotTfPublish"
+          pkg="urdf_try_1"
+          type="robot_tf_pub.py"/>
+
+    <!--  Robot state publisher  -->
+    <node name="robot_state_publisher"
+          pkg="robot_state_publisher"
+          type="robot_state_publisher"/>
+
+    <!--  Set robot description parameter  -->
+    <param
+            name="robot_description"
+            command="$(find xacro)/xacro $(find urdf_try_1)/urdf/robot.xacro"/>
+
+    <!--    Open rviz-->
+    <!--    <node-->
+    <!--            name="rviz"-->
+    <!--            pkg="rviz"-->
+    <!--            type="rviz"-->
+    <!--            args="-d $(find urdf_try_1)/rviz_config.rviz"/>-->
+
+
+</launch>

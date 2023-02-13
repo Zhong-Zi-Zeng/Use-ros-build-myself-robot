@@ -1,0 +1,11 @@
+# ======Nano to Mega Serial port======
+MegaPort: '/dev/ttyACM0'
+MegaBaudrate: 9600
+
+# ======Velocity control topic======
+VelTopic: '/cmd_vel_mux/input/teleop'
+
+# ======Robot parameter======
+Rx: 0.068  # Center distance of side wheel
+Ry: 0.098  # The distance of robot center point to wheel
+R: 0.0375  # Wheel radius

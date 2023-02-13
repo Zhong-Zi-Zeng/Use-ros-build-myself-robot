@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<robot name="xacro_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+    <!--  Robot description  -->
+    <xacro:include filename="$(find urdf_try_1)/urdf/urdf_try_1.xacro"/>
+
+    <!-- Set transmission -->
+    <xacro:include filename="$(find urdf_try_1)/urdf/transmission.xacro"/>
+
+    <!-- Set four diff -->
+    <xacro:include filename="$(find urdf_try_1)/urdf/four_diff.xacro"/>
+
+
+</robot>

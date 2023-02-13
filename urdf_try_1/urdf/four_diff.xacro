@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot name="xacro_four_diff" xmlns:xacro="http://ros.org/wiki/xacro">
+    <gazebo reference="rf_wheel_link">
+        <mu1>50</mu1>
+        <mu2>50</mu2>
+        <kp>10000000.0</kp>
+        <kd>1.0</kd>
+        <minDepth>0.01</minDepth>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <gazebo reference="rb_wheel_link">
+        <mu1>50</mu1>
+        <mu2>50</mu2>
+        <kp>10000000.0</kp>
+        <kd>1.0</kd>
+        <minDepth>0.01</minDepth>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <gazebo reference="lf_wheel_link">
+        <mu1>50</mu1>
+        <mu2>50</mu2>
+        <kp>10000000.0</kp>
+        <kd>1.0</kd>
+        <minDepth>0.01</minDepth>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <gazebo reference="lb_wheel_link">
+        <mu1>50</mu1>
+        <mu2>50</mu2>
+        <kp>10000000.0</kp>
+        <kd>1.0</kd>
+        <minDepth>0.01</minDepth>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="mecanum_controller" filename="libgazebo_ros_planar_move.so">
+            <updateRate>100.0</updateRate>
+            <alwaysOn>true</alwaysOn>
+            <rosebugLevel>Debug</rosebugLevel>
+            <leftFrontJoint>lf_wheel_join</leftFrontJoint>
+            <rightFrontJoint>rf_wheel_join</rightFrontJoint>
+            <leftRearJoint>lb_wheel_join</leftRearJoint>
+            <rightRearJoint>rb_wheel_join</rightRearJoint>
+            <wheelSeparation>0.135</wheelSeparation>
+            <wheelDiameter>0.075</wheelDiameter>
+            <wheelAcceleration>5.0</wheelAcceleration>
+            <robotBaseFrame>base_footprint</robotBaseFrame>
+            <commandTopic>/cmd_vel</commandTopic>
+            <torque>10</torque>
+            <broadcastTF>true</broadcastTF>
+            <odometryTopic>odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <odometrySource>world</odometrySource>
+            <publishTf>1</publishTf>
+            <publishWheelTF>true</publishWheelTF>
+            <publishOdom>true</publishOdom>
+            <publishWheelJointState>true</publishWheelJointState>
+            <legacyMode>false</legacyMode>
+            <robotNamespace>/</robotNamespace>
+            <covariance_x>0.000100</covariance_x>
+            <covariance_y>0.000100</covariance_y>
+            <covariance_yaw>0.010000</covariance_yaw>
+        </plugin>
+    </gazebo>
+
+
+</robot>

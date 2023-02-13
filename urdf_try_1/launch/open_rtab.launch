@@ -1,0 +1,78 @@
+<launch>
+    <!--        <include file="$(find rtabmap_ros)/launch/rtabmap.launch">-->
+    <!--            <arg name="args" value="&#45;&#45;delete_db_on_start"/>-->
+    <!--            <arg name="rgb_topic" value="/camera/color/image_raw"/>-->
+    <!--            <arg name="depth_topic" value="/camera/aligned_depth_to_color/image_raw"/>-->
+    <!--            <arg name="camera_info_topic" value="/camera/color/camera_info"/>-->
+    <!--            <arg name="depth_camera_info_topic" value="/camera/depth/camera_info"/>-->
+    <!--            <arg name="rtabmapviz" value="false"/>-->
+    <!--            &lt;!&ndash;                <arg name="rviz" value="true"/>&ndash;&gt;-->
+    <!--            <arg name="odom_frame_id" value="/odom"/>-->
+    <!--            <arg name="odom_topic" value="/odom"/>-->
+    <!--            <arg name="approx_sync" value="true"/>-->
+    <!--            <arg name="frame_id" value="/base_link"/>-->
+    <!--            &lt;!&ndash;        <arg name="namespace" value="/"/>&ndash;&gt;-->
+    <!--            &lt;!&ndash;        <arg name="use_sim_time" default="true"/>&ndash;&gt;-->
+    <!--        </include>-->
+
+    <arg name="localization" default="false"/>
+    <arg name="rviz" default="false"/>
+
+    <!-- Launch rtabmap for SLAM -->
+    <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+        <arg name="subscribe_rgbd" value="true"/>
+        <arg name="rgbd_topic" value="/rgbd_image"/>
+        <arg name="frame_id" value="base_link"/>
+        <arg name="approx_sync" value="false"/>
+        <arg name="queue_size" value="30"/>
+        <arg name="localization" value="$(arg localization)"/>
+        <arg name="compressed" value="true"/>
+        <arg name="rtabmapviz" value="true"/>
+        <arg name="rviz" value="$(arg rviz)"/>
+        <arg name="visual_odometry" default="false"/>
+        <arg name="odom_topic" default="/odom"/>
+    </include>
+
+
+    <!--    <include file="$(find rtabmap_ros)/launch/rtabmap.launch">-->
+    <!--        <arg name="subscribe_rgbd" value="true"/>-->
+    <!--        <arg name="rgbd_topic" value="/rgbd_image"/>-->
+    <!--        <arg name="frame_id" value="base_link"/>-->
+    <!--        <arg name="approx_sync" value="false"/>-->
+    <!--        <arg name="queue_size" value="10"/>-->
+    <!--        <arg name="localization" value="$(arg localization)"/>-->
+    <!--        <arg name="compressed" value="true"/>-->
+    <!--        &lt;!&ndash;        <arg unless="$(arg rviz)" name="rtabmaprviz" value="true"/>&ndash;&gt;-->
+    <!--        &lt;!&ndash;        <arg if="$(arg rviz)" name="rviz" value="$(arg rviz)" />&ndash;&gt;-->
+    <!--        <arg name="args" value="&#45;&#45;delete_db_on_start"/>-->
+
+    <!--        &lt;!&ndash;        <arg if="$(arg delete-on-start)" name="args" value="delete_db_on_start"/>&ndash;&gt;-->
+    <!--    </include>-->
+
+
+    <!--    <param name="decimation" type="double" value="1"/>-->
+    <!--    <param name="approx_sync" value="true"/>-->
+    <!--    <param name="frame_id" type="string" value="base_link"/>-->
+    <!--    <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="10"/>-->
+    <!--    <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>-->
+    <!--    <param name="RGBD/ProximityBySpace" type="string" value="true"/>-->
+    <!--    <param name="RGBD/AngularUpdate" type="string" value="0.01"/>-->
+    <!--    <param name="RGBD/LinearUpdate" type="string" value="0.01"/>-->
+    <!--    <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>-->
+    <!--    <param name="Grid/FromDepth" type="string" value="false"/> &lt;!&ndash; occupancy grid from lidar &ndash;&gt;-->
+    <!--    <param name="Reg/Force3DoF" type="string" value="true"/>-->
+    <!--    <param name="Reg/Strategy" type="string" value="1"/> &lt;!&ndash; 1=ICP &ndash;&gt;-->
+
+
+    <!--     Open rviz-->
+    <!--        <node-->
+    <!--                name="rviz"-->
+    <!--                pkg="rviz"-->
+    <!--                type="rviz"-->
+    <!--                args="-d $(find urdf_try_1)/rviz_config.rviz"/>-->
+    <!--    <node-->
+    <!--            name="rviz"-->
+    <!--            pkg="rviz"-->
+    <!--            type="rviz"/>-->
+
+</launch>

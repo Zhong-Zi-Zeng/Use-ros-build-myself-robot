@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot name="xacro_transmission" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- Wheel  Transmission -->
+    <set_transmission wheel_joint="lf_wheel_join" motor_link="lf_DCmotor_link"/>
+    <set_transmission wheel_joint="lb_wheel_join" motor_link="lb_DCmotor_link"/>
+    <set_transmission wheel_joint="rf_wheel_join" motor_link="rf_DCmotor_link"/>
+    <set_transmission wheel_joint="rb_wheel_join" motor_link="rb_DCmotor_link"/>
+
+</robot>
