@@ -12,7 +12,7 @@ static float round_count[4];  // 紀錄脈波數量 (for 速度)
 static int degree_count[4];  // 紀錄脈波數量 (for 角度)
 
 // 正反轉
-static String *direction;
+static char *direction;
 
 class Controller {
 public:
@@ -47,9 +47,9 @@ public:
 
     void setup(); // 設定pin腳與中斷函式
 
-    String vel_command(int motor_id, float desired_vel); // 速度控制
+    void vel_command(int motor_id, float desired_vel, char *output); // 速度控制
 
-    void read(String *direction_); // 檢測回授訊號
+    void read(char *direction_); // 檢測回授訊號
 
     void get_vel(float *arr); // 取得目前馬達速度
 

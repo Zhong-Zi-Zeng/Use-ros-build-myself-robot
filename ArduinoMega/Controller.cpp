@@ -22,47 +22,47 @@ Controller::Controller(int lf_fg_pin, int lb_fg_pin, int rf_fg_pin, int rb_fg_pi
 
 void Controller::lf_ISR() {
     round_count[0]++;
-    
-    if (direction[0] == "+")
-      degree_count[0]++;
+
+    if (direction[0] == '+')
+        degree_count[0]++;
     else
-      degree_count[0]--;
-      
+        degree_count[0]--;
+
     if (degree_count[0] % _PPR == 0)
         degree_count[0] = 0;
 }
 
 void Controller::lb_ISR() {
     round_count[1]++;
-    
-    if (direction[1] == "+")
-      degree_count[1]++;
+
+    if (direction[1] == '+')
+        degree_count[1]++;
     else
-      degree_count[1]--;
-      
+        degree_count[1]--;
+
     if (degree_count[1] % _PPR == 0)
         degree_count[1] = 0;
 }
 
 void Controller::rf_ISR() {
     round_count[2]++;
-    
-    if (direction[2] == "+")
-      degree_count[2]++;
+
+    if (direction[2] == '+')
+        degree_count[2]++;
     else
-      degree_count[2]--;
-      
+        degree_count[2]--;
+
     if (degree_count[2] % _PPR == 0)
         degree_count[2] = 0;
 }
 
 void Controller::rb_ISR() {
     round_count[3]++;
-    
-    if (direction[3] == "+")
-      degree_count[3]++;
+
+    if (direction[3] == '+')
+        degree_count[3]++;
     else
-      degree_count[3]--;
+        degree_count[3]--;
 
     if (degree_count[3] % _PPR == 0)
         degree_count[3] = 0;
@@ -81,8 +81,9 @@ void Controller::setup() {
 }
 
 
-String Controller::vel_command(int motor_id, float desired_vel) {
+void Controller::vel_command(int motor_id, float desired_vel, char *output) {
     int pwm;
+
     switch (motor_id) {
         case 0:
             pwm = pid[0].run_vel(desired_vel, now_vel[0]);
@@ -99,28 +100,26 @@ String Controller::vel_command(int motor_id, float desired_vel) {
     }
 
     // 排除太小的pwm數值
-    if (pwm < _MIN_PWM){
-        return "000";
+    if (pwm < _MIN_PWM) {
+        pwm = 0;
     }
 
     // 排除太大的pwm數值
-    if (pwm > _MAX_PWM){
-        return (String)_MAX_PWM;
-    }
-    
-
-    // 補滿3位數
-    if (pwm < 100){
-        return "0" + (String)pwm;
-    }else{
-        return (String)pwm;
+    if (pwm > _MAX_PWM) {
+        pwm = _MAX_PWM;
     }
 
+    // 取出百位、十位、個位數
+    output[2] = (char) (pwm % 10 + 48);
+    output[1] = (char) ((pwm / 10) % 10 + 48);
+    output[0] = (char) ((pwm / 100) % 10 + 48);
 }
 
 
-void Controller::read(String *direction_) {
+void Controller::read(char *direction_) {
     now_time = millis();
+
+//    strcpy(direction, direction_);
     direction = direction_;
 
     // 更新速度
@@ -135,7 +134,7 @@ void Controller::read(String *direction_) {
 
     // 更新角度
     for (int i = 0; i < 4; i++)
-        now_degree[i] = (float)degree_count[i] * (360.0 / _PPR);
+        now_degree[i] = (float) degree_count[i] * (360.0 / _PPR);
 
 
 }
