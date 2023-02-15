@@ -11,9 +11,9 @@ def publish_robot_info():
         response = arduino.read_info('a', 3)
 
         # Publish messages
-        # pub_motor_vel.publish(response[0])
-        # pub_motor_degree.publish(response[1])
-        # pub_imu_info.publish(response[2])
+        pub_motor_vel.publish(response[0])
+        pub_motor_degree.publish(response[1])
+        pub_imu_info.publish(response[2])
 
 if __name__ == "__main__":
     rospy.init_node('RobotStatePublish', anonymous=True)
@@ -22,9 +22,9 @@ if __name__ == "__main__":
     arduino = ArduinoApi()
 
     # Set publisher
-    pub_motor_vel = rospy.Publisher("motor_vel", String, queue_size=5)
-    pub_motor_degree = rospy.Publisher("motor_degree", String, queue_size=5)
-    pub_imu_info = rospy.Publisher("imu_info", String, queue_size=5)
+    pub_motor_vel = rospy.Publisher("motor_vel", String, queue_size=1)
+    pub_motor_degree = rospy.Publisher("motor_degree", String, queue_size=1)
+    pub_imu_info = rospy.Publisher("imu_info", String, queue_size=1)
 
     # Publish real robot info
     publish_robot_info()

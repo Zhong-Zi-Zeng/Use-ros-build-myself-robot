@@ -119,7 +119,6 @@ void Controller::vel_command(int motor_id, float desired_vel, char *output) {
 void Controller::read(char *direction_) {
     now_time = millis();
 
-//    strcpy(direction, direction_);
     direction = direction_;
 
     // 更新速度

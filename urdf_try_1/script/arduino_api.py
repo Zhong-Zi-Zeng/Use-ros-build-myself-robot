@@ -41,7 +41,6 @@ class ArduinoApi:
                 self.clear_register()
                 if first_char == mode and len(response) == data_length:
                     return response
-
             except:
                 rospy.loginfo("Serial Reading Error!")
                 continue

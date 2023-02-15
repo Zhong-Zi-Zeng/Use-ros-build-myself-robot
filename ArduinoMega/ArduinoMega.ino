@@ -41,7 +41,7 @@ void setup() {
     imu.setup(); // 初始化imu的Serial
     controller.setup(); // 設定回授信號接腳
 
-    Timer3.initialize(10000); // 設定每0.1秒控制馬達
+    Timer3.initialize(100000); // 設定每0.1秒控制馬達
     Timer3.attachInterrupt(controlMotor); // 設定中斷服務函式
 
     Serial.begin(115200); // 與Nano通訊用
@@ -111,6 +111,7 @@ void serialEvent() {
              String(imu_degree[0]) + " " + String(imu_degree[1]) + " " + String(imu_degree[2]);
 
             Serial.println(data);
+
             break;
 
             // 從nano端接收各馬達期望速度與方向 ("dxx.xx,xx.xx,xx.xx,xx.xx\n")
