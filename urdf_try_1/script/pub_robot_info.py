@@ -11,11 +11,9 @@ def publish_robot_info():
         response = arduino.read_info('a', 3)
 
         # Publish messages
-        pub_motor_vel.publish(response[0])
-        pub_motor_degree.publish(response[1])
-        pub_imu_info.publish(response[2])
-
-        time.sleep(0.05)
+        # pub_motor_vel.publish(response[0])
+        # pub_motor_degree.publish(response[1])
+        # pub_imu_info.publish(response[2])
 
 if __name__ == "__main__":
     rospy.init_node('RobotStatePublish', anonymous=True)

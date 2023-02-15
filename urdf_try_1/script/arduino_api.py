@@ -4,6 +4,7 @@ import serial
 import rospy
 import time
 
+
 class ArduinoApi:
     def __init__(self):
         self.ser = serial.Serial(rospy.get_param('/MegaPort'), rospy.get_param('/MegaBaudrate'))
@@ -28,10 +29,9 @@ class ArduinoApi:
 
         while True:
             response = " "
-
             try:
                 self.ser.write(str(mode + "\n").encode("utf-8"))
-                self.ser.flush()
+                time.sleep(0.01)
 
                 while self.ser.in_waiting:
                     response = self.ser.readline().decode().rstrip()
@@ -39,14 +39,14 @@ class ArduinoApi:
                 first_char = response[0]
                 response = str(response).strip('a').split('|')
                 self.clear_register()
-
                 if first_char == mode and len(response) == data_length:
                     return response
 
             except:
                 rospy.loginfo("Serial Reading Error!")
-                self.clear_register()
                 continue
+
+
 
     def send_vel_command(self, desired_vel):
         """
@@ -55,10 +55,9 @@ class ArduinoApi:
         """
         try:
             self.ser.write(str("d" + desired_vel + "\n").encode("utf-8"))
-            self.ser.flush()
+            time.sleep(0.01)
         except:
             rospy.loginfo("Serial Writing Error!")
-
 
     def clear_register(self):
         """
@@ -66,4 +65,3 @@ class ArduinoApi:
         """
         while self.ser.in_waiting:
             self.ser.read()
-

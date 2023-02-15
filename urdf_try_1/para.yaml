@@ -1,6 +1,6 @@
 # ======Nano to Mega Serial port======
 MegaPort: '/dev/ttyACM0'
-MegaBaudrate: 9600
+MegaBaudrate: 115200
 
 # ======Velocity control topic======
 VelTopic: '/cmd_vel_mux/input/teleop'

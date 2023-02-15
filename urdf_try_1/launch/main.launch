@@ -8,11 +8,11 @@
     <!--  Open Lidar  -->
     <!--        <include file="$(find hls_lfcd_lds_driver)/launch/hlds_laser.launch"/>-->
 
-<!--    <include file="$(find realsense2_camera)/launch/rs_camera.launch">-->
-<!--        <arg name="align_depth" value="true"/>-->
-<!--        <arg name="enable_gyro" default="false"/>-->
-<!--        <arg name="enable_accel" default="false"/>-->
-<!--    </include>-->
+    <!--    <include file="$(find realsense2_camera)/launch/rs_camera.launch">-->
+    <!--        <arg name="align_depth" value="true"/>-->
+    <!--        <arg name="enable_gyro" default="false"/>-->
+    <!--        <arg name="enable_accel" default="false"/>-->
+    <!--    </include>-->
 
 
     <node pkg="tf" type="static_transform_publisher" name="base_link_to_camera_link"
@@ -30,17 +30,17 @@
           pkg="urdf_try_1"
           type="pub_robot_info.py"/>
 
-    <!-- Joint state publish  -->
-    <node output="screen"
-          name="JointStatePublish"
-          pkg="urdf_try_1"
-          type="joint_state_pub.py"/>
+    <!--     Joint state publish  -->
+<!--    <node output="screen"-->
+<!--          name="JointStatePublish"-->
+<!--          pkg="urdf_try_1"-->
+<!--          type="joint_state_pub.py"/>-->
 
-<!--     Robot tf publish  -->
-    <node output="screen"
-          name="RobotTfPublish"
-          pkg="urdf_try_1"
-          type="robot_tf_pub.py"/>
+    <!--     Robot tf publish  -->
+<!--    <node output="screen"-->
+<!--          name="RobotTfPublish"-->
+<!--          pkg="urdf_try_1"-->
+<!--          type="robot_tf_pub.py"/>-->
 
     <!--  Robot state publisher  -->
     <node name="robot_state_publisher"

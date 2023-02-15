@@ -18,12 +18,31 @@
             <param name="subscribe_scan" type="bool" value="false"/>
             <!-- inputs -->
             <remap from="odom" to="/odom"/>
-<!--            <remap from="scan" to="/scan"/>-->
+            <!--            <remap from="scan" to="/scan"/>-->
             <remap from="rgbd_image" to="rgbd_image"/>
             <remap from="rgb/image" to="/camera/rgb/image_raw"/>
             <remap from="depth/image" to="/camera/depth/image_raw"/>
             <remap from="rgb/camera_info" to="/camera/rgb/image_converted/camera_info"/>
             <param name="queue_size" type="int" value="50"/>
+
+            <!-- output -->
+            <remap from="grid_map" to="/map"/>
+
+            <!-- RTAB-Map's parameters -->
+
+            <!-- localization mode -->
+
         </node>
+
+
     </group>
+
+    <!--    Open rviz-->
+    <node
+            name="rviz"
+            pkg="rviz"
+            type="rviz"
+            args="-d $(find urdf_try_1)/rviz_config/rtab_rviz.rviz"/>
+
+
 </launch>

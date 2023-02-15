@@ -54,7 +54,7 @@ def pub_robot_state():
         x += delta_x
         y += delta_y
 
-        # Publisher Odom
+        # Publisher Odom to base_link TF
         quat = tf.transformations.quaternion_from_euler(0, 0, th)
         br = tf.TransformBroadcaster()
         br.sendTransform((x, y, 0.0),
