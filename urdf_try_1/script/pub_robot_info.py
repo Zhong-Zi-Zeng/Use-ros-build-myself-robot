@@ -22,9 +22,9 @@ if __name__ == "__main__":
     arduino = ArduinoApi()
 
     # Set publisher
-    pub_motor_vel = rospy.Publisher("motor_vel", String, queue_size=1)
-    pub_motor_degree = rospy.Publisher("motor_degree", String, queue_size=1)
-    pub_imu_info = rospy.Publisher("imu_info", String, queue_size=1)
+    pub_motor_vel = rospy.Publisher("motor_vel", String, queue_size=5)
+    pub_motor_degree = rospy.Publisher("motor_degree", String, queue_size=5)
+    pub_imu_info = rospy.Publisher("imu_info", String, queue_size=5)
 
     # Publish real robot info
     publish_robot_info()

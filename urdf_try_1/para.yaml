@@ -3,7 +3,7 @@ MegaPort: '/dev/ttyACM0'
 MegaBaudrate: 115200
 
 # ======Velocity control topic======
-VelTopic: '/cmd_vel_mux/input/teleop'
+VelTopic: '/cmd_vel'
 
 # ======Robot parameter======
 Rx: 0.068  # Center distance of side wheel
