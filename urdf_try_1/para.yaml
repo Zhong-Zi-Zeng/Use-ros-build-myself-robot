@@ -8,4 +8,4 @@ VelTopic: '/cmd_vel'
 # ======Robot parameter======
 Rx: 0.068  # Center distance of side wheel
 Ry: 0.098  # The distance of robot center point to wheel
-R: 0.0375  # Wheel radius
+R: 0.0375  # Wheel radi

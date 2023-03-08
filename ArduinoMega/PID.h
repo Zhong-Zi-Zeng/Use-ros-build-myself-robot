@@ -9,8 +9,8 @@
 #include "math.h"
 
 
-class PID{
-public:
+class PID {
+  public:
     // 期望數值
     float desired = 0;
 
@@ -20,36 +20,45 @@ public:
     // 上一次的誤差
     float last_error = 0;
 
+    // 上一次的輸出
+    float last_output = 0;
+
     // 紀錄時間
     unsigned long now_time = millis();
     unsigned long last_time = now_time;
 
-    int run_vel(float desired_vel, float now_vel){
+    bool restrain_flag = false;
 
-        desired = desired_vel;
-        now_time = millis();
+    int run_vel(float desired_vel, float now_vel) {
+      desired = desired_vel;
+      now_time = millis();
+      float dt = now_time - last_time;
 
-        float dt = now_time - last_time;
+      if (dt >= _SAMPLE_RATE) {
+        float error = desired - now_vel;
+        float delta_error = error - last_error;
 
-        if (dt >= _SAMPLE_RATE) {
-            float error = desired - now_vel;
-            float delta_error = error - last_error;
+        float Kp_error = _Kp * error;
+        float Kd_error = delta_error / dt;
+        Ki_error += error * dt;
 
-            float Kp_error = _Kp * error;
-            Ki_error += error * dt;
-            float Kd_error = delta_error / dt;
+        float vel = Kp_error + _Ki * Ki_error + _Kd * Kd_error;
 
-            last_time = now_time;
-            last_error = error;
-
-            float vel = Kp_error + _Ki * Ki_error + _Kd * Kd_error;
-
-            return (int)((vel-6.72766) / 0.03372969);
+        if (_OUTPUT_RAMP > 0) {
+          float output_rate = (vel - last_output) / dt;
+          if (output_rate > _OUTPUT_RAMP)
+            vel = last_output + _OUTPUT_RAMP * dt;
+          else if (output_rate < -_OUTPUT_RAMP)
+            vel = last_output - _OUTPUT_RAMP * dt;
         }
 
+        last_time = now_time;
+        last_error = error;
+        last_output = vel;
+
+        return (int)((vel - 5.41) / 0.04645805);
+      }
     }
-
-
 };
 
 

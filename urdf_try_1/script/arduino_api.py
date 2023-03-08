@@ -19,12 +19,7 @@ class ArduinoApi:
         :param data_length: To check message is correct.
 
         :return: From arduino mega information.
-
-                 (motor velocity|motor degree|IMU info)
-
-                 motor velocity : "axx.x xx.x xx.x xx.x"
-                 motor degree : "bxx...."
-                 IMU info : "cxx...."
+                 (motor velocity|motor degree|IMU info
         """
 
         while True:
@@ -44,7 +39,6 @@ class ArduinoApi:
             except:
                 rospy.loginfo("Serial Reading Error!")
                 continue
-
 
 
     def send_vel_command(self, desired_vel):

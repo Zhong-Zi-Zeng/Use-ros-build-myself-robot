@@ -21,6 +21,9 @@ def publish_desired_vel(twist_msg):
     W = np.dot(T, X) / R
     W = W.reshape(-1, )
 
+    if (angular_vel_z > 0 and linear_vel_x > 0):
+        if (W[2] > 7):
+            W[2:] = W[2:] - 5
     # Send to arduino api
     desired_vel = [round(w, 2) for w in W]
     desired_vel = list(map(str, desired_vel))
